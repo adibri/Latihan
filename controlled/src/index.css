@@ -108,7 +108,7 @@ form {
 /* font-family: 'bulletsregular'; */
 
 ::-webkit-scrollbar {
-  width: 1.5em;
+  width: 1em;
 }
 
 ::-webkit-scrollbar-track {

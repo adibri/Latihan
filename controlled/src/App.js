@@ -110,6 +110,7 @@ function App() {
                         height: '70px',
                         backgroundColor: '#343942',
                         borderRadius: '5px',
+                        cursor: 'pointer',
                       }}
                     >
                       <h2>{item.name}</h2>
