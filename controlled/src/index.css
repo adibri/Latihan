@@ -31,6 +31,16 @@ h3 {
   color: #61dafb;
 }
 
+h2 {
+  margin-left: 1rem;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+  color: #61dafb;
+}
+
+
+
 p {
   font-family: 'DM Mono', monospace;
   font-size: 1.25rem;
@@ -43,7 +53,6 @@ li {
   text-align: left;
   color: #61dafb;
   list-style: none;
-  line-height-step: 0;
 }
 
 a {
@@ -58,9 +67,48 @@ li :hover {
   color: #8f8f8f;
 }
 
-li :hover::after {
-  content: "➡️";
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
+.poke-box {
+  margin-left: -20px;
+  background-color: #282c34;
+}
+
+.poke-box :hover::after {
+  content: "🛠";
+  position: absolute;
+  right: 25%;
+  font-size: 1.5rem;
+}
+
+.poke-rs {
+  text-align: center;
+}
+
+.poke-rs img {
+  width: 50%;
+}
 /* content: "g"; */
 /* font-family: 'bulletsregular'; */
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  .poke-box :hover::after {
+  content: "🛠";
+  position: absolute;
+  right: 30%;
+  font-size: 1.5rem;
+}
+}
