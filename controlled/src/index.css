@@ -88,17 +88,17 @@ form {
 .poke-box {
   margin-left: -20px;
   background-color: #282c34;
+
 }
 
 .poke-box :hover::after {
-  content: "🛠";
-  position: absolute;
-  right: 30%;
-  font-size: 1.5rem;
+  content: "🔥";
+  margin-left: 3px;
 }
 
 .poke-rs {
   text-align: center;
+  width: 30em;
 }
 
 .poke-rs img {
@@ -108,11 +108,19 @@ form {
 /* font-family: 'bulletsregular'; */
 
 ::-webkit-scrollbar {
-  width: 0.5em;
+  width: 1.5em;
 }
 
 ::-webkit-scrollbar-track {
   background: #61dafb;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 10px;
+  margin: 20px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {

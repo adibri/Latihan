@@ -73,47 +73,55 @@ function App() {
           Search
         </button>
       </form>
-      <div className="poke-home">
-        {loading ? null : (
-          <div>
-            {data?.results?.map((item) => (
-              <ul key={item.url}>
-                <li>
-                  {/* <a href={item.url}> */}
-                  <div
-                    className="poke-box"
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      textAlign: 'center',
-                      alignItems: 'center',
-                      width: '100%',
-                      height: '100px',
-                      backgroundColor: '#f5f5f5',
-                      borderRadius: '5px',
-                    }}
-                  >
-                    <h2>{item.name}</h2>
-                  </div>
-                  {/* </a> */}
-                </li>
-              </ul>
-            ))}
-          </div>
-        )}
-      </div>
       {search ? (
-        <div>
-          {loading ? null : (
+        <div
+          style={{
+            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          {loading ? (
+            <p>....</p>
+          ) : (
             <div className="poke-rs">
-              <h3>{data?.name}</h3>
+              <h3>{`${data?.name}`}</h3>
               <img src={data?.sprites?.front_default} alt={data?.name} />
-              <p>{data?.weight}</p>
-              <p>{data?.height}</p>
+              <p>{`"Weight : "${data?.weight} - "Height :"${data?.height}`}</p>
             </div>
           )}
         </div>
-      ) : null}
+      ) : (
+        <div className="poke-home">
+          {loading ? null : (
+            <div>
+              {data?.results?.map((item) => (
+                <ul key={item.url}>
+                  <li>
+                    {/* <a href={item.url}> */}
+                    <div
+                      className="poke-box"
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        textAlign: 'center',
+                        alignItems: 'center',
+                        width: '100%',
+                        height: '70px',
+                        backgroundColor: '#343942',
+                        borderRadius: '5px',
+                      }}
+                    >
+                      <h2>{item.name}</h2>
+                    </div>
+                    {/* </a> */}
+                  </li>
+                </ul>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
