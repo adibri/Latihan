@@ -50,6 +50,7 @@ function App() {
           onChange={handleSearch}
           style={{
             width: '70%',
+            height: '40px',
             marginBottom: '10px',
             backgroundColor: '#282c34',
             borderRadius: '5px',
@@ -62,41 +63,45 @@ function App() {
           onClick={handleSubmit}
           style={{
             width: '30%',
+            height: '30px',
             marginBottom: '10px',
             backgroundColor: '#ffd700',
+            borderRadius: '5px',
+            border: 'none',
           }}
         >
           Search
         </button>
       </form>
-
-      {loading ? null : (
-        <div>
-          {data?.results?.map((item) => (
-            <ul key={item.url}>
-              <li>
-                {/* <a href={item.url}> */}
-                <div
-                  className="poke-box"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    textAlign: 'center',
-                    alignItems: 'center',
-                    width: '100%',
-                    height: '100px',
-                    backgroundColor: '#f5f5f5',
-                    borderRadius: '5px',
-                  }}
-                >
-                  <h2>{item.name}</h2>
-                </div>
-                {/* </a> */}
-              </li>
-            </ul>
-          ))}
-        </div>
-      )}
+      <div className="poke-home">
+        {loading ? null : (
+          <div>
+            {data?.results?.map((item) => (
+              <ul key={item.url}>
+                <li>
+                  {/* <a href={item.url}> */}
+                  <div
+                    className="poke-box"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      textAlign: 'center',
+                      alignItems: 'center',
+                      width: '100%',
+                      height: '100px',
+                      backgroundColor: '#f5f5f5',
+                      borderRadius: '5px',
+                    }}
+                  >
+                    <h2>{item.name}</h2>
+                  </div>
+                  {/* </a> */}
+                </li>
+              </ul>
+            ))}
+          </div>
+        )}
+      </div>
       {search ? (
         <div>
           {loading ? null : (

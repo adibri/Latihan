@@ -8,6 +8,8 @@ html {
 body {
   margin: auto 20%;
   padding: 0;
+  max-width: 100vh;
+  max-height: 100%;
 }
 
 code {
@@ -76,6 +78,13 @@ form {
   margin-top: 1rem;
 }
 
+.poke-home {
+  overflow-x: hiden;
+  overflow-y: scroll;
+  width: 100%;
+  height: 30em;
+}
+
 .poke-box {
   margin-left: -20px;
   background-color: #282c34;
@@ -84,7 +93,7 @@ form {
 .poke-box :hover::after {
   content: "🛠";
   position: absolute;
-  right: 25%;
+  right: 30%;
   font-size: 1.5rem;
 }
 
@@ -97,6 +106,14 @@ form {
 }
 /* content: "g"; */
 /* font-family: 'bulletsregular'; */
+
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+  background: #61dafb;
+}
 
 @media screen and (max-width: 600px) {
   h1 {
