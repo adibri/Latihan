@@ -4,18 +4,24 @@
  */
 exports.up = function (knex) {
   (async function () {
-    return await knex.raw(`
-      DROP TABLE IF EXISTS "mst_document_module";
-      CREATE TABLE "mst_document_module"  (
-        "document_type_id" bigint(20) NOT NULL,
-        "ms_module_id" bigint(20) NOT NULL,
-        INDEX "fk_ms_document_module_document_type_1" ("document_type_id") USING BTREE,
-        INDEX "fk_ms_document_module_ms_module_1"("ms_module_id") USING BTREE,
-        CONSTRAINT "fk_ms_document_module_document_type_1" FOREIGN KEY ("document_type_id") REFERENCES "mst_document_type" ("id") ON DELETE RESTRICT ON UPDATE RESTRICT,
-        CONSTRAINT "fk_ms_document_module_ms_module_1" FOREIGN KEY ("ms_module_id") REFERENCES "mst_module" ("id") ON DELETE RESTRICT ON UPDATE RESTRICTß
-      ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
-    `);
-  });
+    await knex.schema.createTable('player', (table) => {
+      table
+        .bigInteger('id')
+        .primary('name', { constraintName: 'player', defferable: true })
+        .unique();
+      table.charset('nama', {
+        constraintName: 'name-players-type',
+        defferable: true,
+      });
+      table.charset('item', {
+        constraintName: 'item-players-type',
+        defferable: true,
+      });
+      table.string('email').notNullable();
+      table.string('password').notNullable();
+    });
+    return true;
+  })();
 };
 
 /**
@@ -23,5 +29,13 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  (async function (params) {});
+  (async function (params) {
+    await knex.schema.alterTable('player', (table) => {
+      table.dropColumn('nama');
+      table.dropColumn('item');
+      table.dropColumn('email');
+      table.dropColumn('password');
+    });
+    return true;
+  })();
 };
