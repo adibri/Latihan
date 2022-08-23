@@ -7,16 +7,34 @@ exports.up = function (knex) {
     await knex.schema.createTable('player', (table) => {
       table
         .bigInteger('id')
-        .primary('name', { constraintName: 'player', defferable: true })
+        .primary('name', { constraintName: 'player-name', defferable: true })
         .unique();
-      table.charset('nama', {
-        constraintName: 'name-players-type',
-        defferable: true,
-      });
-      table.charset('item', {
-        constraintName: 'item-players-type',
-        defferable: true,
-      });
+      table
+        .string('nama')
+        .primary('id', {
+          constraintName: 'name-players-type-id',
+          defferable: true,
+          references: [
+            {
+              model: 'player',
+              key: 'id',
+            },
+          ],
+        })
+        .unique();
+      table
+        .string('item')
+        .primary('id', {
+          constraintName: 'item-players-type-id',
+          defferable: true,
+          references: [
+            {
+              model: 'player',
+              key: 'id',
+            },
+          ],
+        })
+        .unique();
       table.string('email').notNullable();
       table.string('password').notNullable();
     });
