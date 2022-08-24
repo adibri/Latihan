@@ -4,3 +4,6 @@
 3. run `knex migrate:make latihan1_migrate` for specific development mode or run `knex migrate:latest`
 4. run `knex seed:run`
 
+### Information about
+1. using `knex`
+2. `mysql2`

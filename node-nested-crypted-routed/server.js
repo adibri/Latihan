@@ -11,7 +11,6 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
-const { json } = require('body-parser');
 const PORT = process.env.PORT || '3303';
 const favicon = require('serve-favicon');
 const cors = require('cors');
@@ -40,9 +39,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(multer({ dest: './uploads' }).any());
 
-
 app.get('/', (req, res) => {
-  res.send('Wellcome To LATIHAN API - ' + json.toString());
+  res.send(`<h3>LATIHAN API @${new Date().getFullYear()}</h3>`);
 });
 
 http.createServer(app).listen(PORT);
