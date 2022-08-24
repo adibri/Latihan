@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "assert": "^2.0.0",
+    "axios": "^0.27.2",
     "buffer": "^6.0.3",
     "http-proxy-middleware": "^2.0.6",
     "https-browserify": "^1.0.0",
@@ -22,7 +23,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "set PORT=4000&& react-app-rewired start ",
     "build": "react-app-rewired build",
     "watch:build": "npm-watch build",
     "dev": "serve -s build",
