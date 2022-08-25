@@ -32,23 +32,24 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className='blocks'>Example</h1>
-        <div className='cards-deck'>
-           {pokemon.map((p) => (
-                  <div>
-                      <img src={p.data.sprites.front_default} alt={p.data.sprites.front_default} />
-                      <h2 key={p.data.id}>{p.data.name}</h2>
-                  </div>
-            ))
-          }
-        </div>
-          <div className='paginations'>
-              <button
-                type='button'
-                className='btns-next'
-                onClick={nextBtn}
-                > next </button> 
+      <h1 className="blocks">Example</h1>
+      <div className="cards-deck">
+        {pokemon.map((p) => (
+          <div key={p.data.id}>
+            <img
+              src={p.data.sprites.front_default}
+              alt={p.data.sprites.front_default}
+            />
+            <h2>{p.data.name}</h2>
           </div>
+        ))}
+      </div>
+      <div className="paginations">
+        <button type="button" className="btns-next" onClick={nextBtn}>
+          {' '}
+          next{' '}
+        </button>
+      </div>
     </div>
   );
 }
