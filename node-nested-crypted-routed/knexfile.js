@@ -27,24 +27,20 @@ module.exports = {
   //   }
   // },
 
-  development: {
-    client: 'mysql2',
-    connection: process.env.DATABASE_URL || {
-      host: '127.0.0.1',
-      port: '3306',
-      database: 'latihan',
-      user: 'root',
-      password: '',
-      options: {
-        encrypt: true,
-      },
-    },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: 'latihan1_migrate',
+  // development: {
+  client: 'mysql2',
+  connection: process.env.DATABASE_URL || {
+    host: '127.0.0.1',
+    port: '3306',
+    database: 'latihan',
+    user: 'root',
+    password: '',
+    options: {
+      encrypt: true,
     },
   },
+  migrations: {
+    tableName: 'latihan1_migrate',
+  },
+  // },
 };
