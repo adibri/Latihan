@@ -34,7 +34,7 @@ module.exports = {
     port: '3306',
     database: 'latihan',
     user: 'root',
-    password: '',
+    password: 'password',
     options: {
       encrypt: true,
     },
