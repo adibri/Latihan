@@ -4,6 +4,7 @@ import './CSS/Home.css'
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
+  const [pokeCount, setPokeCount] = useState(0)
   // const [pokeImg, setPokeImg] = useState([])
 
   useEffect(() => {
@@ -18,9 +19,24 @@ function App() {
       });
   }, []);
 
+
   const nextBtn = async() => {
-    axios.get('https://pokeapi.co/api/v2/pokemon?offset=20&limit=21')
+    axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${pokeCount}&limit=20`)
     .then(res => {
+      setPokeCount(pokeCount + 1)
+      const fetches = res.data.results.map(p => axios.get(p.url))
+
+      Promise.all(fetches).then(data => {
+        setPokemon(data);
+        console.log(data)
+      })
+    });
+  }
+
+  const prevBtn = async() => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${pokeCount}&limit=20`)
+    .then(res => {
+      setPokeCount(pokeCount - 1)
       const fetches = res.data.results.map(p => axios.get(p.url))
 
       Promise.all(fetches).then(data => {
@@ -32,10 +48,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="blocks">Example</h1>
+      <h1 className="blocks">Poke Center</h1>
+        <form className='d-flex justify-content-center'>
+            <input type="text" />
+            <button type='submit'> Search </button>
+        </form>
       <div className="cards-deck">
         {pokemon.map((p) => (
-          <div key={p.data.id}>
+          <div className='poke-card' key={p.data.id}>
             <img
               src={p.data.sprites.front_default}
               alt={p.data.sprites.front_default}
@@ -45,6 +65,15 @@ function App() {
         ))}
       </div>
       <div className="paginations">
+      <button 
+          type="button" 
+          className="btns-next" 
+          onClick={prevBtn}
+          disabled={pokeCount === 0}
+        >
+          {' '}
+          previous{' '}
+        </button>
         <button type="button" className="btns-next" onClick={nextBtn}>
           {' '}
           next{' '}
