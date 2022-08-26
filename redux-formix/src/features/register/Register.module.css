@@ -6,6 +6,24 @@
   justify-content: center;
 }
 
-.row label {
-  margin-top: 15px;
+
+.col {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.col label {
+  width: 100%;
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 1rem;
+}
+
+.col input {
+  width: 50em;
+  height: 30px
 }

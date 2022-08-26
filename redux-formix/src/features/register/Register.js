@@ -10,33 +10,39 @@ function Register() {
     <div>
       <form method="post" action="register" onSubmit={onSubmitRegister}>
         <div className={styles.row}>
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="form-control"
-            placeholder="Email Address"
-            required
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="form-control"
-            placeholder="Password"
-            required
-          />
-          <label htmlFor="passwordConfirm">Confirm Password</label>
-          <input
-            type="password"
-            id="passwordConfirm"
-            name="passwordConfirm"
-            className="form-control"
-            placeholder="Confirm Password"
-            required
-          />
+          <div className={styles.col}>
+            <label htmlFor="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="form-control"
+              placeholder="Email Address"
+              required
+            />
+          </div>
+          <div className={styles.col}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="form-control"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div className={styles.col}>
+            <label htmlFor="passwordConfirm">Confirm Password</label>
+            <input
+              type="password"
+              id="passwordConfirm"
+              name="passwordConfirm"
+              className="form-control"
+              placeholder="Confirm Password"
+              required
+            />
+          </div>
         </div>
       </form>
     </div>
