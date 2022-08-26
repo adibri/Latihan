@@ -5,7 +5,7 @@ import './CSS/Home.css'
 function App() {
   const [pokemon, setPokemon] = useState([]);
   const [pokeCount, setPokeCount] = useState(0)
-  // const [pokeImg, setPokeImg] = useState([])
+  const [pokeSearch, setPokeSearch] = useState('')
 
   useEffect(() => {
       axios.get('https://pokeapi.co/api/v2/pokemon/')
@@ -19,6 +19,14 @@ function App() {
       });
   }, []);
 
+  const searchPokemon = async(e) => {
+    e.preventDefault()
+    await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeSearch}`)
+    .then(res => {
+      console.log(pokeSearch)
+      console.log(res)
+    })
+  }
 
   const nextBtn = async() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${pokeCount}&limit=20`)
@@ -49,8 +57,15 @@ function App() {
   return (
     <div className="App">
       <h1 className="blocks">Poke Center</h1>
-        <form className='d-flex justify-content-center'>
-            <input type="text" />
+        <form 
+          className='d-flex justify-content-center'
+          onSubmit={searchPokemon}  
+        >
+            <input 
+                type="text"
+                value={pokeSearch}
+                onChange={(e) => setPokeSearch(e.target.value)}
+            />
             <button type='submit'> Search </button>
         </form>
       <div className="cards-deck">
