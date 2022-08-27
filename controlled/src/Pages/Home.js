@@ -7,9 +7,10 @@ function Home() {
   const [pokeCount, setPokeCount] = useState(0)
   const [pokeSearch, setPokeSearch] = useState('')
   const [pokeRes, setPokeRes] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-      axios.get('https://pokeapi.co/api/v2/pokemon/')
+      axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${pokeCount}&limit=52`)
       .then(res => {
         const fetches = res.data.results.map(p => axios.get(p.url))
 
@@ -20,17 +21,20 @@ function Home() {
       });
   }, []);
 
-  const searchPokemon = (e) => {
+  const searchPokemon = async(e) => {
     e.preventDefault()
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeSearch}`)
+    await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeSearch}`)
     .then(res => {
-      console.log(res.data)
-      setPokeRes(res.data)
+        setLoading(true)
+        console.log(res.data)
+        setPokeRes(res.data)
+        console.log(pokeRes)
+        setLoading(false)
     })
   }
 
   const nextBtn = async() => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${pokeCount}&limit=20`)
+    axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${pokeCount}&limit=52`)
     .then(res => {
       setPokeCount(pokeCount + 1)
       const fetches = res.data.results.map(p => axios.get(p.url))
@@ -43,7 +47,7 @@ function Home() {
   }
 
   const prevBtn = async() => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${pokeCount}&limit=20`)
+    axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${pokeCount}&limit=52`)
     .then(res => {
       setPokeCount(pokeCount - 1)
       const fetches = res.data.results.map(p => axios.get(p.url))
@@ -58,24 +62,33 @@ function Home() {
   return (
     <div className="App">
       <h1 className="blocks">Poke Center</h1>
-        <form 
-          className='d-flex justify-content-center'
-          onSubmit={searchPokemon}  
-        >
+      <form
+        onSubmit={searchPokemon} 
+        className='d-flex justify-content-center'>
             <input 
                 type="text"
                 value={pokeSearch}
                 onChange={(e) => setPokeSearch(e.target.value)}
             />
-            <button type='submit'> Search </button>
+            <button 
+                type='submit'
+            > 
+                Search 
+            </button>
         </form>
-
-        <div>
-          {pokeRes.map(poke => (
-            <h1> {poke.name} </h1>
-          ))}
-        </div>
-
+        {
+            loading ? (
+                <p> ... </p>
+            ) : (
+            <div className='poke-result'>
+                    <div 
+                        key={pokeRes.id}
+                        className='poke-card d-flex flex-column justify-content-center'>
+                            <h2>{pokeRes.name}</h2>
+                    </div>
+            </div>
+            )
+        }
         <div className="cards-deck">
               {pokemon.map((p) => (
                 <div className='poke-card' key={p.data.id}>
@@ -86,7 +99,7 @@ function Home() {
                   <h2>{p.data.name}</h2>
                 </div>
               ))}
-            </div>
+        </div>
       <div className="paginations">
       <button 
           type="button" 
