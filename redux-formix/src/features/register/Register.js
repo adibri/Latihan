@@ -1,59 +1,83 @@
+import { Form, Formik } from 'formik';
 import React from 'react';
-import styles from './Register.module.css';
+import CustomCheckbox from '../../components/CustomCheckbox';
+import CustomInput from '../../components/CustomInput';
+import CustomSelect from '../../components/CustomSelect';
+import { formSchema } from '../../helpers/schemaForm';
 
-function Register() {
-  const onSubmitRegister = React.useCallback(
-    () => (window.location.href = '/register'),
-    []
-  );
+function Register(props) {
   return (
-    <div className='homes flex flex-col justify-center items-center p-20'>
-      <div>
-        <h1 className="text-3xl text-zinc-200 font-bold underline pb-5">
-          Sign In
-        </h1>
-      </div>
-      <form method="post" action="register" onSubmit={onSubmitRegister} className='border-solid border-2 rounded-md border-zinc-200'>
-        <div className='w-80 md:w-full'>
-          <div className='flex flex-col px-5 py-2'>
-            <label className='text-zinc-200 pb-3 text-left md:text-center' htmlFor="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
+    <div className="w-full px-24 text-zinc-900">
+      <h1 className="w-full text-2xl mt-5 font-extrabold flex justify-center items-center tracking-wider">
+        REGISTRATION
+      </h1>
+      <Formik
+        initialValues={{
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          document_type: '',
+          agrement: false,
+        }}
+        validationSchema={formSchema}
+      >
+        {(props) => (
+          <Form className="flex flex-col mx-24">
+            <CustomInput
+              label="Username"
+              name="username"
+              placeholder="Enter your username"
+              type="text"
+            />
+            <CustomInput
+              label="Email"
               name="email"
-              className="md:w-96 py-2 rounded-lg"
-              placeholder="Email Address"
-              required
+              placeholder="Enter your email"
+              type="email"
             />
-          </div>
-          <div className='flex flex-col px-5 py-2'>
-            <label className='text-zinc-200 pb-3 text-left md:text-center' htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
+            <CustomInput
+              label="Password"
               name="password"
-              className="md:w-96 py-2 rounded-lg"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <div className='flex flex-col px-5 py-2'>
-            <label  className='text-zinc-200 pb-3 text-left md:text-center' htmlFor="passwordConfirm">Confirm Password</label>
-            <input
+              placeholder="Enter your password"
               type="password"
-              id="passwordConfirm"
-              name="passwordConfirm"
-              className="md:w-96 py-2 rounded-lg"
-              placeholder="Confirm Password"
-              required
             />
-          </div>
-          <div className='flex flex-col md:flex-row justify-between px-5 py-2'>
-             <button className='rounded-lg bg-zinc-200 px-0 py-2 m-2 md:px-5 md:py-1 md:m-5'> Sign In</button>
-             <a href='' className='rounded-lg bg-lime-400 px-0 py-2 m-2 md:px-5 md:py-1 md:m-5'> Sign Up</a>
-          </div>
-        </div>
-      </form>
+            <CustomInput
+              label="Confirm Password"
+              name="confirmPassword"
+              placeholder="Enter your password"
+              type="password"
+            />
+            <CustomSelect
+              label="Document Type"
+              name="document_type"
+              placeholder="Select document type"
+              type="select"
+            >
+              <option value="">Select your document</option>
+              <option value="KTP">KTP</option>
+              <option value="NPWP">NPWP</option>
+              <option value="Surat_Pinjaman">Surat Pinjaman</option>
+              <option value="Akta_Perusahaan">Akta Perusahaan</option>
+            </CustomSelect>
+            <CustomCheckbox type="checkbox" name="agreement"></CustomCheckbox>
+            <div className="justify-center w-100 flex flex-row mt-4">
+              <button
+                type="submit"
+                className="py-1 w-2/4 border rounded-2xl mb-5 bg-slate-500 hover:bg-blue-400"
+              >
+                Submit
+              </button>
+              <button
+                type="reset"
+                className="py-2 w-2/4  border rounded-2xl mb-5 bg-slate-500 hover:bg-orange-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 }

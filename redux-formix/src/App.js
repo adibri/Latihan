@@ -1,11 +1,11 @@
 import React from 'react';
 
 import './App.css';
-import Register from './features/register/Register';
+import { Register } from './features';
 
 function App() {
   return (
-    <div className="App">
+    <div className="container mx-auto px-4">
       <Register />
     </div>
   );
