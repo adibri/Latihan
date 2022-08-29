@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '../CSS/Home.css'
 
@@ -6,7 +7,10 @@ function Home() {
   const [pokemon, setPokemon] = useState([]);
   const [pokeCount, setPokeCount] = useState(0)
   const [pokeSearch, setPokeSearch] = useState('')
-  const [pokeRes, setPokeRes] = useState([])
+  const [pokeRes, setPokeRes] = useState({
+      name: null,
+      images: null
+  })
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -26,8 +30,10 @@ function Home() {
     await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeSearch}`)
     .then(res => {
         setLoading(true)
-        console.log(res.data)
-        setPokeRes(res.data)
+        setPokeRes({
+          name: res.data.name,
+          images: res.data.sprites.front_default
+        })
         console.log(pokeRes)
         setLoading(false)
     })
@@ -61,16 +67,18 @@ function Home() {
 
   return (
     <div className="App">
-      <h1 className="blocks">Poke Center</h1>
+      <h1 className="text-5xl font-bold text-center p-20">Poke Center</h1>
       <form
         onSubmit={searchPokemon} 
-        className='d-flex justify-content-center'>
+        className='flex justify-center justify-between mx-auto w-72'>
             <input 
                 type="text"
+                className='shadow appearance-none border rounded w-full py-2 px-3  text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 value={pokeSearch}
                 onChange={(e) => setPokeSearch(e.target.value)}
             />
             <button 
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
                 type='submit'
             > 
                 Search 
@@ -80,37 +88,47 @@ function Home() {
             loading ? (
                 <p> ... </p>
             ) : (
-            <div className='poke-result'>
+            <div className='poke-result flex justify-center'>
                     <div 
                         key={pokeRes.id}
-                        className='poke-card d-flex flex-column justify-content-center'>
-                            <h2>{pokeRes.name}</h2>
+                        className='poke-card flex flex-col justify-center'>
+                            <img
+                              src={pokeRes.images}
+                              alt={pokeRes.images}
+                            />
+                            <h2 className='text-center'>{pokeRes.name}</h2>
                     </div>
             </div>
             )
         }
         <div className="cards-deck">
               {pokemon.map((p) => (
-                <div className='poke-card' key={p.data.id}>
+                <Link 
+                    to={`/${p.data.id}`} 
+                    className='poke-card' key={p.data.id}
+                    state={{
+                      dataParams: p.data
+                     }}
+                    >
                   <img
                     src={p.data.sprites.front_default}
                     alt={p.data.sprites.front_default}
                   />
-                  <h2>{p.data.name}</h2>
-                </div>
+                  <h2 className='text-center'>{p.data.name}</h2>
+                </Link>
               ))}
         </div>
-      <div className="paginations">
+      <div className="flex justify-between mx-auto w-96">
       <button 
           type="button" 
-          className="btns-next" 
+          className="bg-green-500 text-white font-bold py-2 px-4 rounded" 
           onClick={prevBtn}
           disabled={pokeCount === 0}
         >
           {' '}
           previous{' '}
         </button>
-        <button type="button" className="btns-next" onClick={nextBtn}>
+        <button type="button" className="bg-blue-500 text-white font-bold py-2 px-4 rounded" onClick={nextBtn}>
           {' '}
           next{' '}
         </button>

@@ -22,11 +22,6 @@
     background-color: #D3D3D3;
 }
 
-.paginations {
-    display: flex;
-    justify-content: center;
-}
-
 .btns-next {
     display: block;
 }
