@@ -4,9 +4,6 @@ import React from 'react';
 function CustomInput({ label, ...props }) {
   const [field, meta] = useField(props);
 
-  console.log('field', field);
-  console.log('meta', meta);
-
   return (
     <div className="flex flex-col my-3">
       <label className="">{label}</label>

@@ -31,6 +31,6 @@ export const formSchema = yup.object({
     .required('Document type cannot be empty'),
   agreement: yup
     .boolean()
-    .required('Please accept the agreement')
+    .required('accepted is required')
     .oneOf([true], 'Please accept the agreement'),
 });

@@ -4,8 +4,6 @@ import React from 'react';
 function CustomCheckbox({ label, ...props }) {
   const [field, meta] = useField(props);
 
-  console.log('field', field);
-  console.log('meta', meta);
 
   return (
     <>
