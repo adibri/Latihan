@@ -4,6 +4,9 @@ import * as yup from 'yup';
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&].{7,}$/;
+const hurufBesar = /(?=.*[A-Z])$/;
+const angka = /(?=.*\\d)$/;
+const unique = /(?=.*[@$!%*?&])$/;
 // const notAllowSymbolRegex = /(?=.*[#^`~,.<>;':"/[\]|\\{}()=_+-])/;
 
 export const schemaForm = yup.object({
@@ -17,14 +20,17 @@ export const schemaForm = yup.object({
   password: yup
     .string()
     .required('Password is required')
-    .min(8)
+    .min(8, 'Password must be at least 8 characters long')
     .matches(passwordRegex, {
-      message: 'Password must be contain unique characters',
+      message: `Password must be have Capital letters, numbers and @$!%*?&`,
     }),
   confirmPassword: yup
     .string()
     .required('Password not correct')
-    .oneOf([yup.ref('password', { message: 'Enter your password' })]),
+    .oneOf(
+      [yup.ref('password', { message: 'Enter your password' })],
+      'Please input a password previously entered'
+    ),
   address: yup.array().required('Address is required'),
   agreement: yup
     .boolean()
